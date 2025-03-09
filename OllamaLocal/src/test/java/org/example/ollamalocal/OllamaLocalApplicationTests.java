@@ -1,15 +1,23 @@
 package org.example.ollamalocal;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.ai.autoconfigure.ollama.OllamaEmbeddingProperties;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.ollama.OllamaEmbeddingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest(classes = OllamaLocalApplication.class)
 public class OllamaLocalApplicationTests {
 
     @Autowired
     private OllamaChatModel ollamaChatModel;
+
+    @Autowired
+    private OllamaEmbeddingModel embeddingModel;
 
     @Test
     public void testChatModel() {
@@ -27,5 +35,13 @@ public class OllamaLocalApplicationTests {
         System.out.println(result);
     }
 
+
+    @Test
+    public void testEmbeddingModel() {
+        // 例 1：将文本转换为 Embedding
+        float[] embeddings1 = embeddingModel.embed("I like Spring Boot");
+
+        System.out.println(embeddings1);
+    }
 }
 
